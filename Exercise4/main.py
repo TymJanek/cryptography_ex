@@ -7,6 +7,7 @@ from hashlib import sha512
 
 # tested on http://127.0.0.1:8000/docs#/
 # server run by command in terminal: uvicorn main:app --reload
+# required modules: fastAPI, uvicorn, pycryptodome
 
 
 def generate_api():
