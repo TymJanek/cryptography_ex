@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Blockchain</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/docs/4.0/examples/album/album.css" rel="stylesheet">
+</head>
+
+<style>
+    body{
+        background: rgb(1,1,1);
+        background: linear-gradient(90deg, rgba(1,1,1,1) 0%, rgba(9,9,121,1) 50%, rgba(0,212,255,1) 100%);
+    }
+    .jumbotron{
+        background: rgb(1,1,1);
+        background: linear-gradient(90deg, rgba(1,1,1,1) 0%, rgba(9,9,121,1) 50%, rgba(0,212,255,1) 100%);
+    }
+    .container2{
+        color: white;
+        font-size: large;
+    }
+</style>
+
+<body>
+
+<div class="jumbotron"></div>
+<div class="container text-center">
+  <div class="row">
+    <div class="col-sm-4">
+      <button type="button" class="btn btn-light btn-lg" onClick="checkWallet()">Check Wallet</button>
+    </div>
+    <div class="col-sm-4">
+      <button type="button" class="btn btn-light btn-lg" onClick="checkTransaction()">Check Transaction</button>
+    </div>
+    <div class="col-sm-4">
+      <button type="button" class="btn btn-light btn-lg" onClick="checkBlockchainLength()">Check Blockchain Length</button>
+    </div>
+  </div>
+</div>
+
+
+<section class="jumbotron text-center font-weight-bold">
+        <div class="container2"></div>
+</section>
+
+<script>
+    function checkWallet(){
+      $.getJSON('http://127.0.0.1:5000/wallet', function(data) {
+        var text = `Wallet: ${data.block_wallet}\n`
+        $(".container2").html(text);
+    });
+    }
+
+    function checkTransaction(){
+       $.getJSON('http://127.0.0.1:5000/transactions', function(data) {
+        var text = `Recipient: ${data.trans_recipient}<br />
+                    Sender: ${data.trans_sender}<br />
+                    Amount: ${data.trans_amount}`
+        $(".container2").html(text);
+    });
+    }
+
+    function checkBlockchainLength(){
+       $.getJSON('http://127.0.0.1:5000/blocks', function(data) {
+       var text = `Blockchain length: ${data.blockchain_length}`
+       $(".container2").html(text);
+    });
+    }
+</script>
+
+</body>
+</html>
