@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<!-- CSS -->
+<link rel="stylesheet" href="style.css">
+
+<!-- CSS Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+<!-- JavaScript Bundle with Popper (Bootstrap) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+<!-- encoding and decoding srcipt -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+
+
+<script>
+	function download() {
+		var download = document.getElementById("download");
+		var image = document.getElementById("imageCanvas").toDataURL("image/png")
+    		.replace("image/png", "image/octet-stream");
+		download.setAttribute("href", image);
+	}
+
+	function decrypt(){
+		var decode = document.getElementById("decodeText").value;
+		var message = CryptoJS.AES.decrypt(decode, "noOneLooksHere_anyway_i_hope");
+		var par = document.getElementById("decodeResult");
+		par.innerHTML += message.toString(CryptoJS.enc.Utf8);
+	}
+
+</script>
+</head>
+<title>
+Steganografia
+</title>
+
+<body>
+<div class="container"> 
+      
+    </script>
+
+	<!-- ENCODING -->
+
+    <label>Steganography example. Encode the message within the image.</label> <br />
+	<label><b>Step 1. </b>Enter a message to hide within the image:</label><br/>
+	
+	<!-- SECRET MESSAGE -->
+	<input type="password" id="message" placeholder="Enter your secret message"></br>
+	
+	<!-- IMAGE UPLOAD -->
+	<label><b>Step 2. </b>Upload an image. Your image should be at least 800px wide:</label><br/>
+	<input type="file" id="imageLoader" name="imageLoader"/>
+	<canvas id="imageCanvas"></canvas>
+	<canvas id="textCanvas"></canvas> <br />
+
+	<!-- DOWNLOAD BUTTON -->
+	<label><b>Step 3. </b>Download the image</label> <br />
+	<a id="download" download="file.png">
+		<button type="button" onClick="download()" type="button" class="btn btn-primary">Download</button>
+	</a>
+    
+
+	<!-- DECODING -->
+
+	<hr /> <br />
+	<label>Decode the message hidden within the image</label> <br />
+	<label><b>Step 1. </b>Upload an image:</label ><br />
+	<input type="file" id="imageLoader2" name="imageLoader2"/>
+	<canvas id="imageCanvas2"></canvas> <br />
+
+	<!-- DECRYPT BUTTON -->
+	<label><i>Optional step. </i>If the text is unreadable for you, it may be encoded. Try typing it here: </label> <br />
+	<input type="text" id="decodeText" placeholder="Type text here to decode..."> <br /><br />
+	<a id="decrypt">
+		<button type="button" onClick="decrypt()" type="button" class="btn btn-primary">Decrypt</button>
+	</a>
+	<br /><br />
+	<label>Text hidden in image was:</label> <br />
+	<p id="decodeResult"></p>
+</div>
+<script type="text/javascript" src="script.js"> </script>
+</body>
+
+</html>
